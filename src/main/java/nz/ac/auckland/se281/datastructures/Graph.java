@@ -71,19 +71,20 @@ public class Graph<T extends Comparable<T>> {
       }
     }
 
-    // Remove reflexive vertices 
-    for (Edge<T> edge : reflexiveEdges){
+    // Remove reflexive vertices
+    for (Edge<T> edge : reflexiveEdges) {
       edgesCopy.remove(edge);
     }
 
     // If no transitive relation, return false;
-    for (Edge<T> edge : edgesCopy){
-      for (Edge<T> edge2 : edgesCopy){
-        if (edge.getDestination().equals(edge2.getSource()) && !edge.getSource().equals(edge2.getDestination())){
+    for (Edge<T> edge : edgesCopy) {
+      for (Edge<T> edge2 : edgesCopy) {
+        if (edge.getDestination().equals(edge2.getSource())
+            && !edge.getSource().equals(edge2.getDestination())) {
           Edge<T> edge3 = new Edge<T>(edge.getSource(), edge2.getDestination());
-          if (!edgesCopy.contains(edge3)){
+          if (!edgesCopy.contains(edge3)) {
             return false;
-          } else if (edge2.equals(edge3)){
+          } else if (edge2.equals(edge3)) {
             return false;
           }
         }
@@ -95,12 +96,22 @@ public class Graph<T extends Comparable<T>> {
 
   public boolean isAntiSymmetric() {
     // TODO: Task 1.
-    throw new UnsupportedOperationException();
+    for (Edge<T> edge : edges) {
+      Edge<T> revEdge = new Edge<T>(edge.getDestination(), edge.getSource());
+      // This is only false when there is a symmetric edge exists in the set and two edges are not
+      // the same
+      if (edges.contains(revEdge)) {
+        if (!edge.equals(revEdge)) {
+          return false;
+        }
+      }
+    }
+    return true;
   }
 
   public boolean isEquivalence() {
     // TODO: Task 1.
-    if (isReflexive() && isSymmetric() && isTransitive()){
+    if (isReflexive() && isSymmetric() && isTransitive()) {
       return true;
     } else {
       return false;
