@@ -1,8 +1,8 @@
 package nz.ac.auckland.se281.datastructures;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.HashSet;
 
 /**
  * A graph that is composed of a set of verticies and edges.
@@ -18,7 +18,6 @@ public class Graph<T extends Comparable<T>> {
   public Graph(Set<T> verticies, Set<Edge<T>> edges) {
     this.verticies = verticies;
     this.edges = edges;
-
   }
 
   public Set<T> getRoots() {
@@ -29,24 +28,34 @@ public class Graph<T extends Comparable<T>> {
   public boolean isReflexive() {
     // TODO: Task 1.
     Set<T> reflexiveVerticies = new HashSet<T>();
-    for (Edge<T> edge : edges){
-      if (edge.getSource().equals(edge.getDestination())){
+    for (Edge<T> edge : edges) {
+      if (edge.getSource().equals(edge.getDestination())) {
         reflexiveVerticies.add(edge.getSource());
       }
     }
 
-    if (verticies.equals(reflexiveVerticies)){
+    if (verticies.equals(reflexiveVerticies)) {
       return true;
     } else {
       return false;
     }
-
-    //throw new UnsupportedOperationException();
   }
 
   public boolean isSymmetric() {
     // TODO: Task 1.
-    throw new UnsupportedOperationException();
+    Set<Edge<T>> symmetricEdges = new HashSet<Edge<T>>();
+    for (Edge<T> edge : edges) {
+      Edge<T> symEdge = new Edge<T>(edge.getDestination(), edge.getSource());
+      if (edges.contains(symEdge)){
+        symmetricEdges.add(edge);
+      }
+    }
+
+    if (edges.equals(symmetricEdges)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   public boolean isTransitive() {

@@ -1,5 +1,7 @@
 package nz.ac.auckland.se281.datastructures;
 
+import java.util.Objects;
+
 /**
  * An edge in a graph that connects two verticies.
  *
@@ -23,4 +25,23 @@ public class Edge<T> {
   public T getDestination(){
     return destination;
   }
+
+  @Override
+    public boolean equals(Object obj) {
+      if (this == obj) {
+        return true;
+      } else if (obj == null) {
+        return false;
+      } else if (getClass() != obj.getClass()){
+        return false;
+      } else {
+        Edge<T> edge = (Edge<T>) obj;
+        return source == edge.source && destination == edge.destination;
+      }
+    }
+
+  @Override
+    public int hashCode() {
+      return Objects.hash(source, destination);
+    }
 }
