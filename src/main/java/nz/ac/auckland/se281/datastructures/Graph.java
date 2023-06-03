@@ -61,7 +61,7 @@ public class Graph<T extends Comparable<T>> {
   public boolean isTransitive() {
     // TODO: Task 1.
     // Copy the edges set
-    Set<Edge<T>> edgesCopy = edges;
+    Set<Edge<T>> edgesCopy = new HashSet<Edge<T>>(edges);
 
     // Get reflexive verticies
     Set<Edge<T>> reflexiveEdges = new HashSet<Edge<T>>();
@@ -120,7 +120,18 @@ public class Graph<T extends Comparable<T>> {
 
   public Set<T> getEquivalenceClass(T vertex) {
     // TODO: Task 1.
-    throw new UnsupportedOperationException();
+    Set<T> equivalenceClass = new HashSet<T>();
+    if (!isEquivalence()){
+      return equivalenceClass;
+    }
+    for (Edge<T> edge : edges){
+      if (vertex.equals(edge.getSource())){
+        equivalenceClass.add(edge.getDestination());
+      }
+    }
+    return equivalenceClass;
+
+
   }
 
   public List<T> iterativeBreadthFirstSearch() {
