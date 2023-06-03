@@ -46,7 +46,7 @@ public class Graph<T extends Comparable<T>> {
     Set<Edge<T>> symmetricEdges = new HashSet<Edge<T>>();
     for (Edge<T> edge : edges) {
       Edge<T> symEdge = new Edge<T>(edge.getDestination(), edge.getSource());
-      if (edges.contains(symEdge)){
+      if (edges.contains(symEdge)) {
         symmetricEdges.add(edge);
       }
     }
@@ -60,7 +60,37 @@ public class Graph<T extends Comparable<T>> {
 
   public boolean isTransitive() {
     // TODO: Task 1.
-    throw new UnsupportedOperationException();
+    // Copy the edges set
+    Set<Edge<T>> edgesCopy = edges;
+
+    // Get reflexive verticies
+    Set<Edge<T>> reflexiveEdges = new HashSet<Edge<T>>();
+    for (Edge<T> edge : edges) {
+      if (edge.getSource().equals(edge.getDestination())) {
+        reflexiveEdges.add(edge);
+      }
+    }
+
+    // Remove reflexive vertices 
+    for (Edge<T> edge : reflexiveEdges){
+      edgesCopy.remove(edge);
+    }
+
+    // If no transitive relation, return false;
+    for (Edge<T> edge : edgesCopy){
+      for (Edge<T> edge2 : edgesCopy){
+        if (edge.getDestination().equals(edge2.getSource()) && !edge.getSource().equals(edge2.getDestination())){
+          Edge<T> edge3 = new Edge<T>(edge.getSource(), edge2.getDestination());
+          if (!edgesCopy.contains(edge3)){
+            return false;
+          } else if (edge2.equals(edge3)){
+            return false;
+          }
+        }
+      }
+    }
+
+    return true;
   }
 
   public boolean isAntiSymmetric() {
