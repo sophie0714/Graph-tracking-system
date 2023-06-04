@@ -4,6 +4,7 @@ public class Node<T> {
     // Field
 	private T data;
     private Node<T> next;
+    private Node<T> prev;
 
     // Constructor
     public Node(T data){
@@ -18,12 +19,20 @@ public class Node<T> {
         return next;
     }
 
+    public Node<T> getPrev(){
+        return prev;
+    }
+
     public void setData(T data){
         this.data = data;
     }
 
     public void setNext(Node<T> node){
         this.next = node;
+    }
+
+    public void setPrev(Node<T> node){
+        this.prev = node;
     }
 
 
