@@ -1,8 +1,10 @@
 package nz.ac.auckland.se281.datastructures;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * A graph that is composed of a set of verticies and edges.
@@ -22,7 +24,33 @@ public class Graph<T extends Comparable<T>> {
 
   public Set<T> getRoots() {
     // TODO: Task 1.
-    throw new UnsupportedOperationException();
+    Set<T> roots = new TreeSet<>();
+
+    // Indegree = 0 and outDegree > 0 -> root
+    for (T vertex : verticies){
+      int inDegree=0;
+      int outDegree=0;
+      for (Edge<T> edge : edges){
+        if (vertex == edge.getDestination()){
+          inDegree++;
+        }
+        if (vertex == edge.getSource()){
+          outDegree++;
+        }
+      }
+      if (inDegree == 0 && outDegree > 0){
+        roots.add(vertex);
+      }
+    }
+    // smallest vertex in equivalence relation
+    for (T vertex : verticies){
+      Set<T> equivalenceClass = getEquivalenceClass(vertex);
+      if (!equivalenceClass.isEmpty()){
+        roots.add(Collections.min(equivalenceClass));
+      }
+    }
+
+    return roots;
   }
 
   public boolean isReflexive() {
@@ -120,7 +148,7 @@ public class Graph<T extends Comparable<T>> {
 
   public Set<T> getEquivalenceClass(T vertex) {
     // TODO: Task 1.
-    Set<T> equivalenceClass = new HashSet<T>();
+    Set<T> equivalenceClass = new TreeSet<T>();
     if (!isEquivalence()){
       return equivalenceClass;
     }
