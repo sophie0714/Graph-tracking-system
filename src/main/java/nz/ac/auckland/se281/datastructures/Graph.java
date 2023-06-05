@@ -28,25 +28,25 @@ public class Graph<T extends Comparable<T>> {
     Set<T> roots = new TreeSet<>();
 
     // Indegree = 0 and outDegree > 0 -> root
-    for (T vertex : verticies){
-      int inDegree=0;
-      int outDegree=0;
-      for (Edge<T> edge : edges){
-        if (vertex == edge.getDestination()){
+    for (T vertex : verticies) {
+      int inDegree = 0;
+      int outDegree = 0;
+      for (Edge<T> edge : edges) {
+        if (vertex == edge.getDestination()) {
           inDegree++;
         }
-        if (vertex == edge.getSource()){
+        if (vertex == edge.getSource()) {
           outDegree++;
         }
       }
-      if (inDegree == 0 && outDegree > 0){
+      if (inDegree == 0 && outDegree > 0) {
         roots.add(vertex);
       }
     }
     // smallest vertex in equivalence relation
-    for (T vertex : verticies){
+    for (T vertex : verticies) {
       Set<T> equivalenceClass = getEquivalenceClass(vertex);
-      if (!equivalenceClass.isEmpty()){
+      if (!equivalenceClass.isEmpty()) {
         roots.add(Collections.min(equivalenceClass));
       }
     }
@@ -150,17 +150,15 @@ public class Graph<T extends Comparable<T>> {
   public Set<T> getEquivalenceClass(T vertex) {
     // TODO: Task 1.
     Set<T> equivalenceClass = new TreeSet<T>();
-    if (!isEquivalence()){
+    if (!isEquivalence()) {
       return equivalenceClass;
     }
-    for (Edge<T> edge : edges){
-      if (vertex.equals(edge.getSource())){
+    for (Edge<T> edge : edges) {
+      if (vertex.equals(edge.getSource())) {
         equivalenceClass.add(edge.getDestination());
       }
     }
     return equivalenceClass;
-
-
   }
 
   public List<T> iterativeBreadthFirstSearch() {
@@ -172,35 +170,35 @@ public class Graph<T extends Comparable<T>> {
     // TODO: Task 2.
     Stack<T> discovered = new Stack<>();
     List<T> explored = new ArrayList<>();
-    for (T a : getRoots()){
+    for (T a : getRoots()) {
       discovered.push(a);
     }
-    while (!discovered.isEmpty()){
+    while (!discovered.isEmpty()) {
       T b = discovered.pop();
-      if (!explored.contains(b)){
+      if (!explored.contains(b)) {
         explored.add(b);
-      }
-      List<T> reach = reachable(b);
-      while (!reach.isEmpty()){
-        for (T c : reachable(b)){
-          discovered.push(c);
-          reach.remove(c);
+        List<T> reach = reachable(b);
+        while (!reach.isEmpty()) {
+          for (T c : reachable(b)) {
+            discovered.push(c);
+            reach.remove(c);
+          }
         }
       }
     }
-    return explored; 
+    return explored;
   }
 
-  public List<T> reachable(T vertex){
+  public List<T> reachable(T vertex) {
     Set<T> reach = new TreeSet<T>();
-    for (Edge<T> edge : edges){
-      if (vertex.equals(edge.getSource()) && !vertex.equals(edge.getDestination())){
+    for (Edge<T> edge : edges) {
+      if (vertex.equals(edge.getSource()) && !vertex.equals(edge.getDestination())) {
         reach.add(edge.getDestination());
       }
     }
 
     List<T> result = new ArrayList<T>();
-    for (T r : reach){
+    for (T r : reach) {
       result.add(r);
     }
     Collections.reverse(result);
