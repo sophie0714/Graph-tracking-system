@@ -3,6 +3,7 @@ package nz.ac.auckland.se281.datastructures;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -30,7 +31,7 @@ public class Graph<T extends Comparable<T>> {
    */
   public Set<T> getRoots() {
     // TODO: Task 1.
-    Set<T> roots = new TreeSet<>();
+    Set<Integer> roots = new TreeSet<>();
 
     // Indegree = 0 and outDegree > 0 -> root
     for (T vertex : verticies) {
@@ -45,18 +46,23 @@ public class Graph<T extends Comparable<T>> {
         }
       }
       if (inDegree == 0 && outDegree > 0) {
-        roots.add(vertex);
+        roots.add(Integer.parseInt(vertex.toString()));
       }
     }
     // smallest vertex in equivalence relation
     for (T vertex : verticies) {
       Set<T> equivalenceClass = getEquivalenceClass(vertex);
       if (!equivalenceClass.isEmpty()) {
-        roots.add(Collections.min(equivalenceClass));
+        roots.add(Integer.parseInt(Collections.min(equivalenceClass).toString()));
       }
     }
+    // Change the type from Integer to T
+    LinkedHashSet<T> rootsInOrder = new LinkedHashSet<T>();
+    for (Integer root : roots) {
+      rootsInOrder.add((T) (Object) String.valueOf(root));
+    }
 
-    return roots;
+    return rootsInOrder;
   }
 
   /**
@@ -185,16 +191,20 @@ public class Graph<T extends Comparable<T>> {
    */
   public Set<T> getEquivalenceClass(T vertex) {
     // TODO: Task 1.
-    Set<T> equivalenceClass = new TreeSet<T>();
+    Set<Integer> equivalenceClass = new TreeSet<>();
     if (!isEquivalence()) {
-      return equivalenceClass;
+      return new TreeSet<T>();
     }
     for (Edge<T> edge : edges) {
       if (vertex.equals(edge.getSource())) {
-        equivalenceClass.add(edge.getDestination());
+        equivalenceClass.add(Integer.parseInt(edge.getDestination().toString()));
       }
     }
-    return equivalenceClass;
+    LinkedHashSet<T> equivalenceClassInOrder = new LinkedHashSet<>();
+    for (Integer v : equivalenceClass) {
+      equivalenceClassInOrder.add((T) (Object) String.valueOf(v));
+    }
+    return equivalenceClassInOrder;
   }
 
   /**
