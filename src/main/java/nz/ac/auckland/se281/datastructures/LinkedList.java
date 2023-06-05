@@ -1,5 +1,9 @@
 package nz.ac.auckland.se281.datastructures;
-
+/**
+ * Thd doubly linked list class which has a head node and a tail node with the length of the list.
+ * 
+ * @author Sophie Park
+ */
 public class LinkedList<T> {
 
   private Node<T> head;
@@ -10,6 +14,11 @@ public class LinkedList<T> {
     length = 0;
   }
 
+  /**
+   * A method adds a new node at the end of the linked list.
+   * 
+   * @param data
+   */
   // Add a node at the end
   public void append(T data) {
     Node<T> newNode = new Node<T>(data);
@@ -30,6 +39,11 @@ public class LinkedList<T> {
     length++;
   }
 
+  /**
+   * A method adds a new node at front of the linked list.
+   * 
+   * @param data
+   */
   // Add a node at front
   public void prepend(T data) {
     Node<T> newNode = new Node<T>(data);
@@ -51,6 +65,12 @@ public class LinkedList<T> {
     length++;
   }
 
+  /**
+   * A method finds a node at the specific position.
+   * 
+   * @param pos
+   * @return T a value at the target position
+   */
   // Find a value at the specific position
   public T fetch(int pos) {
     Node<T> temp = head;
@@ -62,6 +82,12 @@ public class LinkedList<T> {
     return result;
   }
 
+  /**
+   * A method inserts a new node at the specific position.
+   * 
+   * @param pos the position to insert a new node
+   * @param data a data that the new node has
+   */
   // Put a value in the specific position
   public void insert(int pos, T data) {
     if (pos == 0) {
@@ -83,6 +109,11 @@ public class LinkedList<T> {
     length++;
   }
 
+  /**
+   * A method removes a node at the specific position.
+   * 
+   * @param pos the position of the node to remove
+   */
   // Remove a value at a specific position
   public void remove(int pos) {
     if (size() == 1) {
@@ -116,6 +147,11 @@ public class LinkedList<T> {
     length--;
   }
 
+  /**
+   * A method return the size of the linked list.
+   * 
+   * @return int the size of the linked list
+   */
   // Get the size of value
   public int size() {
     return length;

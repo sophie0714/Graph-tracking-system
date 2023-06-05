@@ -23,6 +23,11 @@ public class Graph<T extends Comparable<T>> {
     this.edges = edges;
   }
 
+  /**
+   * A method finds all roots in the graph.
+   *
+   * @return Set<T> The set of roots
+   */
   public Set<T> getRoots() {
     // TODO: Task 1.
     Set<T> roots = new TreeSet<>();
@@ -54,6 +59,11 @@ public class Graph<T extends Comparable<T>> {
     return roots;
   }
 
+  /**
+   * A method determines whether a graph is reflexive or not.
+   *
+   * @return boolean showing if the graph is reflexive
+   */
   public boolean isReflexive() {
     // TODO: Task 1.
     Set<T> reflexiveVerticies = new HashSet<T>();
@@ -70,6 +80,11 @@ public class Graph<T extends Comparable<T>> {
     }
   }
 
+  /**
+   * A method determines whether a graph is symmetric or not.
+   *
+   * @return boolean showing if the graph is symmetric
+   */
   public boolean isSymmetric() {
     // TODO: Task 1.
     Set<Edge<T>> symmetricEdges = new HashSet<Edge<T>>();
@@ -87,6 +102,11 @@ public class Graph<T extends Comparable<T>> {
     }
   }
 
+  /**
+   * A method determines whether a graph is transitive or not.
+   *
+   * @return boolean showing if the graph is transitive
+   */
   public boolean isTransitive() {
     // TODO: Task 1.
     // Copy the edges set
@@ -123,6 +143,11 @@ public class Graph<T extends Comparable<T>> {
     return true;
   }
 
+  /**
+   * A method determines whether a graph is antisymmetric or not.
+   *
+   * @return boolean showing if the graph is antisymmetric
+   */
   public boolean isAntiSymmetric() {
     // TODO: Task 1.
     for (Edge<T> edge : edges) {
@@ -138,6 +163,11 @@ public class Graph<T extends Comparable<T>> {
     return true;
   }
 
+  /**
+   * A method determines whether a graph is equivalence or not.
+   *
+   * @return boolean showing if the graph is equivalence
+   */
   public boolean isEquivalence() {
     // TODO: Task 1.
     if (isReflexive() && isSymmetric() && isTransitive()) {
@@ -147,6 +177,12 @@ public class Graph<T extends Comparable<T>> {
     }
   }
 
+  /**
+   * A method finds all equivalence classes in a graph.
+   *
+   * @param T vertex which we would like to find equivalence classes
+   * @return Set<T> all equivalence classes for a vertex
+   */
   public Set<T> getEquivalenceClass(T vertex) {
     // TODO: Task 1.
     Set<T> equivalenceClass = new TreeSet<T>();
@@ -161,6 +197,11 @@ public class Graph<T extends Comparable<T>> {
     return equivalenceClass;
   }
 
+  /**
+   * A method iteratively finds the breadth first search for the graph.
+   *
+   * @return List<T> the list of breadth first search verticies
+   */
   public List<T> iterativeBreadthFirstSearch() {
     // TODO: Task 2.
     Queue<T> discovered = new Queue<T>();
@@ -192,6 +233,11 @@ public class Graph<T extends Comparable<T>> {
     return explored;
   }
 
+  /**
+   * A method iteratively finds the depth first search for the graph.
+   *
+   * @return List<T> the list of depth first search verticies
+   */
   public List<T> iterativeDepthFirstSearch() {
     // TODO: Task 2.
 
@@ -229,7 +275,13 @@ public class Graph<T extends Comparable<T>> {
     return explored;
   }
 
-  // Helper method to find what nodes are reachable from the vertex
+  /**
+   * A helpter method which finds all reachable verticies form a vertex.
+   *
+   * @param vertex
+   * @return List<T> containing all reachable verticies in a list
+   */
+  // A helper method to find what nodes are reachable from the vertex
   public List<T> reachableVertex(T vertex) {
     Set<T> reach = new TreeSet<T>();
     for (Edge<T> edge : edges) {
@@ -246,12 +298,23 @@ public class Graph<T extends Comparable<T>> {
     return result;
   }
 
+  /**
+   * A helper method which reverses the given list of reachable verticies.
+   *
+   * @param reach all reachable vertices in asending order
+   * @return List<T> reachable verticies in descending order
+   */
   // helper method to reverse the list of reachable verticies
   public List<T> reversedReachable(List<T> reach) {
     Collections.reverse(reach);
     return reach;
   }
 
+  /**
+   * A method recursively search for all breadth first search verticies by calling recursive method.
+   *
+   * @return List<T> a list of the breadth first search verticies
+   */
   public List<T> recursiveBreadthFirstSearch() {
     // TODO: Task 3.
     List<T> explored = new ArrayList<T>();
@@ -259,6 +322,13 @@ public class Graph<T extends Comparable<T>> {
     return recursiveBreadthFirstSearch(explored, discovered);
   }
 
+  /**
+   * A recursive method finds all breadth first search verticies.
+   *
+   * @param explored all the verticies that have been explored
+   * @param discovered all the verticies that have been discovered, but not yet explored
+   * @return List<T> completed breadth first search list
+   */
   public List<T> recursiveBreadthFirstSearch(List<T> explored, Queue<T> discovered) {
     // To initiate, all roots are discoverd
     if (explored.isEmpty()) {
@@ -288,6 +358,11 @@ public class Graph<T extends Comparable<T>> {
     return explored;
   }
 
+  /**
+   * A method recursively search for all depth first search verticies by calling recursive method.
+   *
+   * @return List<T> a list of the depth first search verticies
+   */
   public List<T> recursiveDepthFirstSearch() {
     // TODO: Task 3.
     List<T> explored = new ArrayList<T>();
@@ -295,6 +370,13 @@ public class Graph<T extends Comparable<T>> {
     return recursiveDepthFirstsearch(explored, discovered);
   }
 
+  /**
+   * A recursive method finds all breadth first search verticies.
+   *
+   * @param explored all the verticies that have been explored
+   * @param discovered all the verticies that have been discovered, but not yet explored
+   * @return List<T> completed depth first search list
+   */
   public List<T> recursiveDepthFirstsearch(List<T> explored, Stack<T> discovered) {
 
     // To initialise, put roots in descending order in the discovered
