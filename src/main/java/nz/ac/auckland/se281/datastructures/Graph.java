@@ -180,8 +180,8 @@ public class Graph<T extends Comparable<T>> {
   /**
    * A method finds all equivalence classes in a graph.
    *
-   * @param T vertex which we would like to find equivalence classes
-   * @return Set<T> all equivalence classes for a vertex
+   *@param T vertex which we would like to find equivalence classes
+   *@return Set<T> all equivalence classes for a vertex
    */
   public Set<T> getEquivalenceClass(T vertex) {
     // TODO: Task 1.
@@ -200,7 +200,7 @@ public class Graph<T extends Comparable<T>> {
   /**
    * A method iteratively finds the breadth first search for the graph.
    *
-   * @return List<T> the list of breadth first search verticies
+   *@return List<T> the list of breadth first search verticies
    */
   public List<T> iterativeBreadthFirstSearch() {
     // TODO: Task 2.
@@ -236,7 +236,7 @@ public class Graph<T extends Comparable<T>> {
   /**
    * A method iteratively finds the depth first search for the graph.
    *
-   * @return List<T> the list of depth first search verticies
+   *@return List<T> the list of depth first search verticies
    */
   public List<T> iterativeDepthFirstSearch() {
     // TODO: Task 2.
@@ -278,21 +278,22 @@ public class Graph<T extends Comparable<T>> {
   /**
    * A helpter method which finds all reachable verticies form a vertex.
    *
-   * @param vertex
-   * @return List<T> containing all reachable verticies in a list
+   *@param vertex
+   *@return List<T> containing all reachable verticies in a list
    */
   // A helper method to find what nodes are reachable from the vertex
   public List<T> reachableVertex(T vertex) {
-    Set<T> reach = new TreeSet<T>();
+    Set<T> reachedVertex = new TreeSet<T>();
+    // Find all vertices that have been connected to the vertex except the self loop
     for (Edge<T> edge : edges) {
       if (vertex.equals(edge.getSource()) && !vertex.equals(edge.getDestination())) {
-        reach.add(edge.getDestination());
+        reachedVertex.add(edge.getDestination());
       }
     }
 
     // Move the set to list to satisfy return type
     List<T> result = new ArrayList<T>();
-    for (T r : reach) {
+    for (T r : reachedVertex) {
       result.add(r);
     }
     return result;
@@ -301,8 +302,8 @@ public class Graph<T extends Comparable<T>> {
   /**
    * A helper method which reverses the given list of reachable verticies.
    *
-   * @param reach all reachable vertices in asending order
-   * @return List<T> reachable verticies in descending order
+   *@param reach all reachable vertices in asending order
+   *@return List<T> reachable verticies in descending order
    */
   // helper method to reverse the list of reachable verticies
   public List<T> reversedReachable(List<T> reach) {
@@ -313,7 +314,7 @@ public class Graph<T extends Comparable<T>> {
   /**
    * A method recursively search for all breadth first search verticies by calling recursive method.
    *
-   * @return List<T> a list of the breadth first search verticies
+   *@return List<T> a list of the breadth first search verticies
    */
   public List<T> recursiveBreadthFirstSearch() {
     // TODO: Task 3.
@@ -325,9 +326,9 @@ public class Graph<T extends Comparable<T>> {
   /**
    * A recursive method finds all breadth first search verticies.
    *
-   * @param explored all the verticies that have been explored
-   * @param discovered all the verticies that have been discovered, but not yet explored
-   * @return List<T> completed breadth first search list
+   *@param explored all the verticies that have been explored
+   *@param discovered all the verticies that have been discovered, but not yet explored
+   *@return List<T> completed breadth first search list
    */
   public List<T> recursiveBreadthFirstSearch(List<T> explored, Queue<T> discovered) {
     // To initiate, all roots are discoverd
@@ -361,7 +362,7 @@ public class Graph<T extends Comparable<T>> {
   /**
    * A method recursively search for all depth first search verticies by calling recursive method.
    *
-   * @return List<T> a list of the depth first search verticies
+   *@return List<T> a list of the depth first search verticies
    */
   public List<T> recursiveDepthFirstSearch() {
     // TODO: Task 3.
@@ -373,9 +374,9 @@ public class Graph<T extends Comparable<T>> {
   /**
    * A recursive method finds all breadth first search verticies.
    *
-   * @param explored all the verticies that have been explored
-   * @param discovered all the verticies that have been discovered, but not yet explored
-   * @return List<T> completed depth first search list
+   *@param explored all the verticies that have been explored
+   *@param discovered all the verticies that have been discovered, but not yet explored
+   *@return List<T> completed depth first search list
    */
   public List<T> recursiveDepthFirstsearch(List<T> explored, Stack<T> discovered) {
 

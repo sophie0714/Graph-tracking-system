@@ -1,9 +1,9 @@
 package nz.ac.auckland.se281.datastructures;
 
 /**
- * A stack class which contains a self-made linked list 
+ * A stack class which contains a self-made linked list. 
  * 
- * @author Sophie Park
+ *@author Sophie Park
  */
 public class Stack<T> {
   private LinkedList<T> linkedList;
@@ -15,7 +15,7 @@ public class Stack<T> {
   /**
    * A method determines if the stack is empty or not.
    * 
-   * @return boolean of if the stack is empty or not
+   *@return boolean of if the stack is empty or not
    */
   public boolean isEmpty() {
     if (linkedList.size() == 0) {
@@ -32,7 +32,7 @@ public class Stack<T> {
   /**
    * A method gives a value at the specific position and removes it.
    * 
-   * @return the value at the specific position
+   *@return the value at the specific position
    */
   public T pop() {
     T result = linkedList.fetch(linkedList.size() - 1);
@@ -42,7 +42,7 @@ public class Stack<T> {
 
   /**
    * A method gives the value at the end of the linked-list.
-   * @return
+   *@return a value that a node at the end contains
    */
   public T peek() {
     return linkedList.fetch(linkedList.size() - 1);

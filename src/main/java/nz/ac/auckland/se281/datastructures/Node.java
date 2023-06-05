@@ -1,8 +1,10 @@
 package nz.ac.auckland.se281.datastructures;
+
 /**
- * A node class contains the value at the node and the pointers to the node before and after the node
- * 
- * @author Sophie Park
+ * A node class contains the value at the node and the pointers to the node before and after the
+ * node.
+ *
+ *@author Sophie Park
  */
 public class Node<T> {
   // Field

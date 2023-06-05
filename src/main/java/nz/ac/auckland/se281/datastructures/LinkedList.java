@@ -1,8 +1,9 @@
 package nz.ac.auckland.se281.datastructures;
+
 /**
  * Thd doubly linked list class which has a head node and a tail node with the length of the list.
- * 
- * @author Sophie Park
+ *
+ *@author Sophie Park
  */
 public class LinkedList<T> {
 
@@ -16,8 +17,8 @@ public class LinkedList<T> {
 
   /**
    * A method adds a new node at the end of the linked list.
-   * 
-   * @param data
+   *
+   *@param data a value that a new node has
    */
   // Add a node at the end
   public void append(T data) {
@@ -41,8 +42,8 @@ public class LinkedList<T> {
 
   /**
    * A method adds a new node at front of the linked list.
-   * 
-   * @param data
+   *
+   *@param data a value that the new node has to have
    */
   // Add a node at front
   public void prepend(T data) {
@@ -67,9 +68,9 @@ public class LinkedList<T> {
 
   /**
    * A method finds a node at the specific position.
-   * 
-   * @param pos
-   * @return T a value at the target position
+   *
+   *@param pos the position in the linked list to find the value
+   *@return T a value at the target position
    */
   // Find a value at the specific position
   public T fetch(int pos) {
@@ -84,9 +85,9 @@ public class LinkedList<T> {
 
   /**
    * A method inserts a new node at the specific position.
-   * 
-   * @param pos the position to insert a new node
-   * @param data a data that the new node has
+   *
+   *@param pos the position to insert a new node
+   *@param data a data that the new node has
    */
   // Put a value in the specific position
   public void insert(int pos, T data) {
@@ -111,8 +112,8 @@ public class LinkedList<T> {
 
   /**
    * A method removes a node at the specific position.
-   * 
-   * @param pos the position of the node to remove
+   *
+   *@param pos the position of the node to remove
    */
   // Remove a value at a specific position
   public void remove(int pos) {
@@ -150,7 +151,7 @@ public class LinkedList<T> {
   /**
    * A method return the size of the linked list.
    * 
-   * @return int the size of the linked list
+   *@return int the size of the linked list
    */
   // Get the size of value
   public int size() {
