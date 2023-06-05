@@ -339,7 +339,8 @@ public class Graph<T extends Comparable<T>> {
     // TODO: Task 3.
     List<T> explored = new ArrayList<T>();
     Queue<T> discovered = new Queue<T>();
-    return recursiveBreadthFirstSearch(explored, discovered);
+    Set<T> roots = getRoots();
+    return recursiveBreadthFirstSearch(explored, discovered, roots);
   }
 
   /**
@@ -349,13 +350,15 @@ public class Graph<T extends Comparable<T>> {
    * @param discovered all the verticies that have been discovered, but not yet explored
    * @return List<T> completed breadth first search list
    */
-  public List<T> recursiveBreadthFirstSearch(List<T> explored, Queue<T> discovered) {
+  public List<T> recursiveBreadthFirstSearch(List<T> explored, Queue<T> discovered, Set<T> roots) {
     // To initiate, all roots are discoverd
-    if (explored.isEmpty()) {
-      Set<T> roots = getRoots();
+    if (!roots.isEmpty() && discovered.isEmpty()) {
+      List<T> rootsInList = new ArrayList<>();
       for (T root : roots) {
-        discovered.enQueue(root);
+        rootsInList.add(root);
       }
+      discovered.enQueue(rootsInList.get(0));
+      roots.remove(rootsInList.get(0));
     }
     // Until all nodes are explored, recursively repeat this stage
     if (!(explored.size() == verticies.size())) {
@@ -372,7 +375,7 @@ public class Graph<T extends Comparable<T>> {
           reach.remove(c);
         }
       }
-      recursiveBreadthFirstSearch(explored, discovered);
+      recursiveBreadthFirstSearch(explored, discovered, roots);
     }
 
     return explored;
