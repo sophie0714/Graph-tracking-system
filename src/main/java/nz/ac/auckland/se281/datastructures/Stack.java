@@ -4,7 +4,7 @@ public class Stack<T> {
     private LinkedList<T> linkedList;
 
     public Stack(){
-        linkedList= new LinkedList<T>();;
+        linkedList= new LinkedList<T>();
     }
 
     public boolean isEmpty(){
