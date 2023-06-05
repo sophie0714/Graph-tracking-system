@@ -163,7 +163,32 @@ public class Graph<T extends Comparable<T>> {
 
   public List<T> iterativeBreadthFirstSearch() {
     // TODO: Task 2.
-    return new ArrayList<>();
+    Queue<T> discovered = new Queue<T>();
+    List<T> explored = new ArrayList<T>();
+
+    Set<T> roots = getRoots();
+
+    for (T a :roots){
+      discovered.enQueue(a);
+    }
+
+    while (!discovered.isEmpty()){
+      T b = discovered.peek();
+      discovered.deQueue();
+      if (!explored.contains(b)) {
+        explored.add(b);
+        List<T> reach = reachable(b);
+        Collections.reverse(reach);
+        while (!reach.isEmpty()) {
+          for (T c : reachable(b)) {
+            discovered.enQueue(c);
+            reach.remove(c);
+          }
+        }
+      }
+
+    }
+    return explored;
   }
 
   public List<T> iterativeDepthFirstSearch() {
@@ -191,8 +216,9 @@ public class Graph<T extends Comparable<T>> {
       if (!explored.contains(b)) {
         explored.add(b);
         List<T> reach = reachable(b);
+        reach = reversedReachable(reach);
         while (!reach.isEmpty()) {
-          for (T c : reachable(b)) {
+          for (T c : reversedReachable(reachable(b))) {
             discovered.push(c);
             reach.remove(c);
           }
@@ -214,8 +240,12 @@ public class Graph<T extends Comparable<T>> {
     for (T r : reach) {
       result.add(r);
     }
-    Collections.reverse(result);
     return result;
+  }
+
+  public List<T> reversedReachable(List<T> reach){
+    Collections.reverse(reach);
+    return reach;
   }
 
   public List<T> recursiveBreadthFirstSearch() {
