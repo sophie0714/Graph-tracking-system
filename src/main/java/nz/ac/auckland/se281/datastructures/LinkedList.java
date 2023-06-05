@@ -73,6 +73,13 @@ public class LinkedList<T> {
   }
 
   public void remove(int pos) {
+    if (size()== 1){
+      head = null;
+      tail = null;
+      length--;
+      return;
+    } 
+
     if (pos == 0) {
       Node<T> headNext = head.getNext();
       head = headNext;
