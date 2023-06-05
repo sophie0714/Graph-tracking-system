@@ -31,9 +31,10 @@ public class LinkedList<T> {
     if (length == 0) {
       head = newNode;
     } else if (length == 1) {
-      tail = newNode;
-      head.setNext(tail);
-      tail.setPrev(head);
+      newNode.setNext(head);
+      head.setPrev(newNode);
+      tail = head;
+      head = newNode;
     } else {
       newNode.setNext(head);
       head.setPrev(newNode);
