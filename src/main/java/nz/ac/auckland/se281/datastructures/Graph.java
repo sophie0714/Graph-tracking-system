@@ -222,20 +222,19 @@ public class Graph<T extends Comparable<T>> {
 
     for (T a : roots) {
       discovered.enQueue(a);
-    }
-
-    // Until all vertecies are explored, repeat the process
-    while (!(explored.size() == verticies.size())) {
-      T b = discovered.peek();
-      discovered.deQueue();
-      if (!explored.contains(b)) {
-        explored.add(b);
-        List<T> reach = reachableVerticies(b);
-        Collections.reverse(reach);
-        while (!reach.isEmpty()) {
-          for (T c : reachableVerticies(b)) {
-            discovered.enQueue(c);
-            reach.remove(c);
+      // Until all vertecies are explored, repeat the process
+      while (!(explored.size() == verticies.size()) && !discovered.isEmpty()) {
+        T b = discovered.peek();
+        discovered.deQueue();
+        if (!explored.contains(b)) {
+          explored.add(b);
+          List<T> reach = reachableVerticies(b);
+          Collections.reverse(reach);
+          while (!reach.isEmpty()) {
+            for (T c : reachableVerticies(b)) {
+              discovered.enQueue(c);
+              reach.remove(c);
+            }
           }
         }
       }
