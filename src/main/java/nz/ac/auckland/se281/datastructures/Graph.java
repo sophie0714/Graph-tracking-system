@@ -166,13 +166,15 @@ public class Graph<T extends Comparable<T>> {
     Queue<T> discovered = new Queue<T>();
     List<T> explored = new ArrayList<T>();
 
+    // Get roots and mark the roots as discovered
     Set<T> roots = getRoots();
 
     for (T a :roots){
       discovered.enQueue(a);
     }
 
-    while (!discovered.isEmpty()){
+    // Until all vertecies are explored, repeat the process 
+    while (!(explored.size()==verticies.size())){
       T b = discovered.peek();
       discovered.deQueue();
       if (!explored.contains(b)) {
@@ -210,8 +212,8 @@ public class Graph<T extends Comparable<T>> {
       discovered.push(a);
     }
 
-    // Iterate until the stack is emtpy and all nodes are explored
-    while (!discovered.isEmpty()) {
+    // Iterate until all nodes are explored
+    while (!(explored.size()==verticies.size())) {
       T b = discovered.pop();
       if (!explored.contains(b)) {
         explored.add(b);
@@ -228,6 +230,7 @@ public class Graph<T extends Comparable<T>> {
     return explored;
   }
 
+  // Helper method to find what nodes are reachable from the vertex
   public List<T> reachable(T vertex) {
     Set<T> reach = new TreeSet<T>();
     for (Edge<T> edge : edges) {
@@ -243,6 +246,7 @@ public class Graph<T extends Comparable<T>> {
     return result;
   }
 
+  // helper method to reverse the list of reachable verticies
   public List<T> reversedReachable(List<T> reach){
     Collections.reverse(reach);
     return reach;
@@ -250,7 +254,38 @@ public class Graph<T extends Comparable<T>> {
 
   public List<T> recursiveBreadthFirstSearch() {
     // TODO: Task 3.
-    throw new UnsupportedOperationException();
+    List<T> explored = new ArrayList<T>();
+    Queue<T> discovered = new Queue<T>();
+    return recursiveBreadthFirstSearch(explored, discovered);
+  }
+
+  public List<T> recursiveBreadthFirstSearch(List<T> explored, Queue<T> discovered){
+    // To initiate, all roots are discoverd
+    if (explored.isEmpty()){
+      Set<T> roots = getRoots();
+      for (T root : roots){
+        discovered.enQueue(root);
+      }
+    }
+    // Until all nodes are explored, recursively repeat this stage
+    if (!(explored.size()==verticies.size())) {
+      T dequed = discovered.peek();
+      discovered.deQueue();
+      if(!explored.contains(dequed)) {
+        explored.add(dequed);
+      }
+      List<T> reach = reachable(dequed);
+        Collections.reverse(reach);
+        while (!reach.isEmpty()) {
+          for (T c : reachable(dequed)) {
+            discovered.enQueue(c);
+            reach.remove(c);
+          }
+        }
+        recursiveBreadthFirstSearch(explored, discovered);
+    }
+
+    return explored;
   }
 
   public List<T> recursiveDepthFirstSearch() {
