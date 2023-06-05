@@ -168,11 +168,24 @@ public class Graph<T extends Comparable<T>> {
 
   public List<T> iterativeDepthFirstSearch() {
     // TODO: Task 2.
+
     Stack<T> discovered = new Stack<>();
     List<T> explored = new ArrayList<>();
-    for (T a : getRoots()) {
+
+    // Get roots and reverse the order 
+    Set<T> roots = getRoots();
+    List<T> rootsInList = new ArrayList<>();
+    for (T a : roots){
+      rootsInList.add(a);
+    }
+    Collections.reverse(rootsInList);
+
+    // Add roots to the stack first
+    for (T a : rootsInList) {
       discovered.push(a);
     }
+
+    // Iterate until the stack is emtpy and all nodes are explored
     while (!discovered.isEmpty()) {
       T b = discovered.pop();
       if (!explored.contains(b)) {
