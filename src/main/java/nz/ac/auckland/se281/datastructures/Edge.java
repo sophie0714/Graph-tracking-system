@@ -18,30 +18,31 @@ public class Edge<T> {
     this.destination = destination;
   }
 
-  public T getSource(){
+  public T getSource() {
     return source;
   }
 
-  public T getDestination(){
+  public T getDestination() {
     return destination;
   }
 
   @Override
-    public boolean equals(Object obj) {
-      if (this == obj) {
-        return true;
-      } else if (obj == null) {
-        return false;
-      } else if (getClass() != obj.getClass()){
-        return false;
-      } else {
-        Edge<T> edge = (Edge<T>) obj;
-        return source == edge.source && destination == edge.destination;
-      }
+  // When two edges have the same source and destination, two edges are equal
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    } else if (obj == null) {
+      return false;
+    } else if (getClass() != obj.getClass()) {
+      return false;
+    } else {
+      Edge<T> edge = (Edge<T>) obj;
+      return source == edge.source && destination == edge.destination;
     }
+  }
 
   @Override
-    public int hashCode() {
-      return Objects.hash(source, destination);
-    }
+  public int hashCode() {
+    return Objects.hash(source, destination);
+  }
 }

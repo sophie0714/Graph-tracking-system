@@ -13,12 +13,15 @@ public class LinkedList<T> {
   // Add a node at the end
   public void append(T data) {
     Node<T> newNode = new Node<T>(data);
+    // if the newnode is the first node, make it head
     if (length == 0) {
       head = newNode;
+      // if the newndoe is the second node, make it tail
     } else if (length == 1) {
       tail = newNode;
       head.setNext(tail);
       tail.setPrev(head);
+      // In other cases, add at the end
     } else {
       tail.setNext(newNode);
       newNode.setPrev(tail);
@@ -30,13 +33,16 @@ public class LinkedList<T> {
   // Add a node at front
   public void prepend(T data) {
     Node<T> newNode = new Node<T>(data);
+    // if the node is the first node, make it head
     if (length == 0) {
       head = newNode;
+      // if the node is the second node, make it tail and link with the head
     } else if (length == 1) {
       newNode.setNext(head);
       head.setPrev(newNode);
       tail = head;
       head = newNode;
+      // In other cases, add at front
     } else {
       newNode.setNext(head);
       head.setPrev(newNode);
@@ -48,6 +54,7 @@ public class LinkedList<T> {
   // Find a value at the specific position
   public T fetch(int pos) {
     Node<T> temp = head;
+    // Iteratively find the node at the specific position
     for (int i = 0; i < pos; i++) {
       temp = temp.getNext();
     }
@@ -85,14 +92,17 @@ public class LinkedList<T> {
       return;
     }
 
+    // When remove the first node, make the second node as head
     if (pos == 0) {
       Node<T> headNext = head.getNext();
       head = headNext;
       head.setPrev(null);
+      // When remove the last node, make the latest ndoe as tail
     } else if (pos == length - 1) {
       Node<T> tailPrev = tail.getPrev();
       tail = tailPrev;
       tail.setNext(null);
+      // In the middle, connect the nodes before and after the removed node linked
     } else {
       Node<T> temp = head;
       for (int i = 0; i < pos; i++) {

@@ -179,10 +179,10 @@ public class Graph<T extends Comparable<T>> {
       discovered.deQueue();
       if (!explored.contains(b)) {
         explored.add(b);
-        List<T> reach = reachable(b);
+        List<T> reach = reachableVertex(b);
         Collections.reverse(reach);
         while (!reach.isEmpty()) {
-          for (T c : reachable(b)) {
+          for (T c : reachableVertex(b)) {
             discovered.enQueue(c);
             reach.remove(c);
           }
@@ -216,10 +216,10 @@ public class Graph<T extends Comparable<T>> {
       T b = discovered.pop();
       if (!explored.contains(b)) {
         explored.add(b);
-        List<T> reach = reachable(b);
+        List<T> reach = reachableVertex(b);
         reach = reversedReachable(reach);
         while (!reach.isEmpty()) {
-          for (T c : reversedReachable(reachable(b))) {
+          for (T c : reversedReachable(reachableVertex(b))) {
             discovered.push(c);
             reach.remove(c);
           }
@@ -230,7 +230,7 @@ public class Graph<T extends Comparable<T>> {
   }
 
   // Helper method to find what nodes are reachable from the vertex
-  public List<T> reachable(T vertex) {
+  public List<T> reachableVertex(T vertex) {
     Set<T> reach = new TreeSet<T>();
     for (Edge<T> edge : edges) {
       if (vertex.equals(edge.getSource()) && !vertex.equals(edge.getDestination())) {
@@ -238,6 +238,7 @@ public class Graph<T extends Comparable<T>> {
       }
     }
 
+    // Move the set to list to satisfy return type
     List<T> result = new ArrayList<T>();
     for (T r : reach) {
       result.add(r);
@@ -273,10 +274,10 @@ public class Graph<T extends Comparable<T>> {
       if (!explored.contains(dequed)) {
         explored.add(dequed);
       }
-      List<T> reach = reachable(dequed);
+      List<T> reach = reachableVertex(dequed);
       Collections.reverse(reach);
       while (!reach.isEmpty()) {
-        for (T c : reachable(dequed)) {
+        for (T c : reachableVertex(dequed)) {
           discovered.enQueue(c);
           reach.remove(c);
         }
@@ -314,10 +315,10 @@ public class Graph<T extends Comparable<T>> {
       T b = discovered.pop();
       if (!explored.contains(b)) {
         explored.add(b);
-        List<T> reach = reachable(b);
+        List<T> reach = reachableVertex(b);
         reach = reversedReachable(reach);
         while (!reach.isEmpty()) {
-          for (T c : reversedReachable(reachable(b))) {
+          for (T c : reversedReachable(reachableVertex(b))) {
             discovered.push(c);
             reach.remove(c);
           }
