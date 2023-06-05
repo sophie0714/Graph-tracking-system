@@ -183,10 +183,11 @@ public class Graph<T extends Comparable<T>> {
     }
   }
 
+  
   /**
    * A method finds all equivalence classes in a graph.
-   *
-   * @param T vertex which we would like to find equivalence classes
+   * 
+   * @param vertex vertex which we would like to find equivalence classes
    * @return a set of all equivalence classes for a vertex
    */
   public Set<T> getEquivalenceClass(T vertex) {
@@ -287,7 +288,7 @@ public class Graph<T extends Comparable<T>> {
   /**
    * A helpter method which finds all reachable verticies form a vertex.
    *
-   * @param vertex
+   * @param vertex a vertex to find out what verticies are reachable from
    * @return list of all reachable verticies in a list
    */
   // A helper method to find what nodes are reachable from the vertex
@@ -321,7 +322,7 @@ public class Graph<T extends Comparable<T>> {
    * A helper method which reverses the given list of reachable verticies.
    *
    * @param reach all reachable vertices in asending order
-   * @return List<T> reachable verticies in descending order
+   * @return a list of reachable verticies in descending order
    */
   // helper method to reverse the list of reachable verticies
   public List<T> reversedReachable(List<T> reach) {
