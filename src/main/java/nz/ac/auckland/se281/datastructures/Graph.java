@@ -294,11 +294,18 @@ public class Graph<T extends Comparable<T>> {
     }
 
     // Move the set to list to satisfy return type
-    List<T> result = new ArrayList<T>();
+    List<Integer> result = new ArrayList<>();
     for (T r : reachedVerticies) {
-      result.add(r);
+      result.add(Integer.parseInt(r.toString()));
     }
-    return result;
+    Collections.sort(result);
+
+    // Convert the integer array to generic array
+    List<T> resultInT = new ArrayList<>();
+    for (Integer i : result) {
+      resultInT.add((T) (Object) String.valueOf(i));
+    }
+    return resultInT;
   }
 
   /**
