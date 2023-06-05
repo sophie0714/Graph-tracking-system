@@ -10,6 +10,7 @@ public class LinkedList<T> {
     length = 0;
   }
 
+  // Add a node at the end
   public void append(T data) {
     Node<T> newNode = new Node<T>(data);
     if (length == 0) {
@@ -26,6 +27,7 @@ public class LinkedList<T> {
     length++;
   }
 
+  // Add a node at front
   public void prepend(T data) {
     Node<T> newNode = new Node<T>(data);
     if (length == 0) {
@@ -43,6 +45,7 @@ public class LinkedList<T> {
     length++;
   }
 
+  // Find a value at the specific position
   public T fetch(int pos) {
     Node<T> temp = head;
     for (int i = 0; i < pos; i++) {
@@ -52,6 +55,7 @@ public class LinkedList<T> {
     return result;
   }
 
+  // Put a value in the specific position
   public void insert(int pos, T data) {
     if (pos == 0) {
       prepend(data);
@@ -72,13 +76,14 @@ public class LinkedList<T> {
     length++;
   }
 
+  // Remove a value at a specific position
   public void remove(int pos) {
-    if (size()== 1){
+    if (size() == 1) {
       head = null;
       tail = null;
       length--;
       return;
-    } 
+    }
 
     if (pos == 0) {
       Node<T> headNext = head.getNext();
@@ -101,6 +106,7 @@ public class LinkedList<T> {
     length--;
   }
 
+  // Get the size of value
   public int size() {
     return length;
   }
